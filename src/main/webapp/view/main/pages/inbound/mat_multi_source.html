@@ -1,0 +1,71 @@
+#@mainLayout()
+
+#define main()
+<div data-controller="inbound--mat-multi-source">
+    <nav class="tabs is-fullwidth">
+        <ul>
+            <li class="tab is-active" id="tab1" data-action="click->inbound--mat-multi-source#clicktab"><a>1. 分物料</a>
+            </li>
+            <li class="tab" id="tab2" data-action="click->inbound--mat-multi-source#clicktab"><a>2. 分供应商</a></li>
+            <li class="tab" id="tab3" data-action="click->inbound--mat-multi-source#clicktab"><a>3. 入库明细</a></li>
+        </ul>
+    </nav>
+
+    <div class="is-size-7">
+        <div id="content-tab1" class="content-tab">
+            <div class="table-container">
+                <table class="table is-striped is-narrow is-hoverable is-fullwidth is-size-7">
+                    <colgroup>
+                        <col width="5%">
+                        <col width="15%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="5%">
+                        <col width="5%">
+                        <col width="5%">
+                    <col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th style="text-align: center">#</th>
+                    <th style="text-align: center">物料</th>
+                    <th style="text-align: center">供应商数量</th>
+                    <th style="text-align: center">采购金额</th>
+                    <th style="text-align: center">最高价</th>
+                    <th style="text-align: center">最低价</th>
+                    <th style="text-align: center">差异%</th>
+                    <th style="text-align: center">供应商</th>
+                </tr>
+                </thead>
+                <tbody>
+                #for(x : items)
+                <tr>
+                    <td style="text-align: center">#(for.index + 1)</td>
+                    <td><a data-action="click->inbound--mat-multi-source#drilldown"
+                           data-key="matVendorsID"
+                           data-href="/pages/inbound/matMultiSourceVendors?m=#(x.matCode)">#(x.matCode)</a></td>
+                    <td style="text-align: center">
+                        #(x.vendorCount)
+                    </td>
+                    <td style="text-align: right">#number(x.totalAmt, ",###.00")</td>
+                    <td style="text-align: right">#number(x.maxPrice, ",###.00")</td>
+                    <td style="text-align: right">#number(x.minPrice, ",###.00")</td>
+                    <td style="text-align: right">#number(x.diffRate, ",###.00")</td>
+                    <td style="text-align: left">#(x.vendors)</td>
+                </tr>
+
+                #end
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div id="content-tab2" class="content-tab" style="display:none">
+            <div id="matVendorsID">请选择一颗物料</div>
+        </div>
+        <div id="content-tab3" class="content-tab" style="display:none">
+            <div id="plantItemsID">请选择一个工厂</div>
+        </div>
+    </div>
+
+</div>
+#end

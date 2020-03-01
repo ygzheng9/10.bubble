@@ -1,0 +1,221 @@
+#define mainLayout()
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>集成供应链</title>
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon"/>
+
+    <link rel="stylesheet" href="/assets/lib/fontawesome/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/assets/lib/bulma/css/bulma.min.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/zz/admin.css">
+
+    <script type="text/javascript" src="/assets/lib/jquery-3.4.1.min.js"></script>
+
+    <!--    layui 不能打包，只能单独引用 -->
+    <script type="text/javascript" src="/assets/lib/layui/layui.js"></script>
+    <script>
+        // layui 的 配置
+        function initLayui() {
+            //config的设置是全局的
+            layui
+                .config({
+                    // 这里是 url，不是本地路径
+                    base: '/assets/lib/layui/plugin/'
+                })
+                .extend({
+                    // 设定模块别名，在 use 时使用
+                    // key 和 模块文件 exports 的名字保持一致
+                    okTab: 'okmodules/okTab',
+                    countUp: 'okmodules/countUp',
+                    okUtils: 'okmodules/okUtils',
+                    okGVerify: 'okmodules/okGVerify',
+                    qrcode: 'okmodules/qrcode',
+                    jQqrcode: 'okmodules/jQqrcode',
+                    okAddlink: 'okmodules/okAddlink',
+                    okLayer: 'okmodules/okLayer',
+                    okMock: 'okmodules/okMock',
+
+                    zzUtils: 'zz/utils'
+                });
+        }
+
+        initLayui();
+    </script>
+
+    <script type="text/javascript" src="/assets/js/stimulus_app.js"></script>
+</head>
+
+<body>
+<div class="turbolinks-progress-bar"></div>
+
+<!-- START NAV -->
+<nav class="navbar is-white">
+    <div class="container" data-controller="burger" data-burger-action-key="#(actionKey)">
+        <div class="navbar-brand">
+            <a class="navbar-item brand-text" href="../index.html">
+                集成供应链
+            </a>
+            <div class="navbar-burger burger" data-target="burger.navMenu" data-action="click->burger#click"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div id="navMenu" class="navbar-menu" data-target="burger.menu">
+            <div class="navbar-start">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        关联关系
+                    </a>
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="/pages/relation/vendorPlant">
+                            供应网络
+                        </a>
+                        <a class="navbar-item" href="/pages/relation/clientPlant">
+                            销售布局
+                        </a>
+                        <a class="navbar-item" href="/pages/relation/clientVendor">
+                            对应关系
+                        </a>
+                        <a class="navbar-item" href="/pages/mat/projectPlant">
+                            客户项目
+                        </a>
+                    </div>
+                </div>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        物料复用性
+                    </a>
+
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="/pages/mat/bomMatReuse">
+                            分BOM
+                        </a>
+                        <a class="navbar-item" href="/pages/mat/projectMatReuse">
+                            分项目
+                        </a>
+                    </div>
+                </div>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        采购业务
+                    </a>
+
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="/pages/inbound/summary">
+                            采购概览
+                        </a>
+                        <a class="navbar-item" href="/pages/inbound/plantVendor">
+                            工厂采购
+                        </a>
+                        <a class="navbar-item" href="/pages/inbound/matMultiSourceSummary">
+                            多点采购
+                        </a>
+                        <a class="navbar-item" href="/pages/inbound/amtByVendor">
+                            供应商分析
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link is-light">
+                        <strong>#(loginAccount.nickname)</strong>
+                    </a>
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="/logout">
+                            重新登录
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- END NAV -->
+<div class="section">
+    <div class="container">
+        <div class="columns is-variable is-1 ">
+            <div class="column is-2 ">
+                <aside class="menu is-hidden-mobile">
+                    <p class="menu-label">
+                        关联关系
+                    </p>
+                    <ul class="menu-list">
+                        <li class=""><a href="/pages/relation/vendorPlant">供应网络</a></li>
+                        <li class=""><a href="/pages/relation/clientPlant">销售布局</a></li>
+                        <li class=""><a href="/pages/relation/clientVendor">对应关系</a></li>
+
+                        <li class=""><a href="/pages/mat/projectPlant">客户项目</a></li>
+
+                        <li><a href="/pages/wordCloud">纪要分析</a></li>
+                    </ul>
+                    <p class="menu-label">
+                        零件复用性
+                    </p>
+                    <ul class="menu-list">
+                        <li><a href="/pages/mat/bomMatReuse">分 BOM</a></li>
+                        <li><a href="/pages/mat/projectMatReuse">分项目</a></li>
+                    </ul>
+                    <p class="menu-label">
+                        采购业务
+                    </p>
+                    <ul class="menu-list">
+                        <li><a href="/pages/inbound/summary">采购概览</a></li>
+                        <li><a href="/pages/inbound/plantVendor">工厂采购</a></li>
+                        <li><a href="/pages/inbound/matMultiSourceSummary">多点采购</a></li>
+                        <li><a href="/pages/inbound/amtByVendor">供应商分析</a></li>
+                    </ul>
+
+                    #permission("admin")
+                    <p class="menu-label">
+                        待发布
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <a>审批流</a>
+                            <ul>
+                                <li><a href="/pages/workflow/engine/list">列表</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>工作日志</a>
+                            <ul>
+                                <li><a href="/pages/workday/list">列表</a></li>
+                                <li><a href="/pages/workday/newEntry">新增</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    #end
+                </aside>
+            </div>
+            <div class="column is-block">
+                #@main()
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <strong>Insight</strong> by <a href="https://bulma.com">ISP@IBM 2019</a>. Get hands dirty.
+    </div>
+</footer>
+
+#@js?()
+</body>
+
+</html>
+
+#end

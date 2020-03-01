@@ -1,0 +1,33 @@
+<div>
+    <div class="has-text-centered is-size-3">在 #(count) 个 BOM 中共用的物料</div>
+    <table class="table is-striped is-narrow is-hoverable is-fullwidth is-size-7">
+        <colgroup>
+            <col>
+            <col width="20%">
+            <col width="10%">
+            <col width="50%">
+            <col width="20%">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>料号</th>
+            <th>版本</th>
+            <th>品名</th>
+            <th>类别</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : items)
+        <tr>
+            <td>#(for.index + 1)</td>
+            <td><a href="/pages/mat/bomByMat?mat=#(x.partNum)" class="layui-table-link">
+                #(x.partNum)</a></td>
+            <td>#(x.partVersion)</td>
+            <td>#(x.partName) #(x.partNameZh)</td>
+            <td>#(x.partFamily)</td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+</div>

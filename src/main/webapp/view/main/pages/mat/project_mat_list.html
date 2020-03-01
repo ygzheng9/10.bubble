@@ -1,0 +1,40 @@
+#@mainLayout()
+
+#define main()
+<div class="container is-fluid">
+    <div class="has-text-centered is-size-3">
+        #(p.client) #(p.project) 项目下所有零件
+    </div>
+
+    <table class="table is-striped is-narrow is-hoverable is-fullwidth is-size-7">
+        <colgroup>
+            <col width="5%">
+            <col width="20%">
+            <col width="10%">
+            <col width="50%">
+            <col width="20%">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>料号</th>
+            <th>复用次数</th>
+            <th>品名</th>
+            <th>品类</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : items)
+        <tr>
+            <td>#(for.index + 1)</td>
+            <td>#(x.partNum)</td>
+            <td><a href="/pages/mat/projectByMat?m=#(x.partNum)">#(x.reused)</a></td>
+            <td>#(x.partName) #(partNameZh)</td>
+            <td>#(x.partFamily)</td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+
+</div>
+#end

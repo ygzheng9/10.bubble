@@ -1,0 +1,35 @@
+#@mainLayout()
+
+#define main()
+<div class="container is-fluid">
+    <div class="has-text-centered is-size-3">#(client)@#(plant)-#(bomid)</div>
+    <table class="table is-striped is-narrow is-hoverable is-fullwidth is-size-7">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th style="width: 100px;">层级</th>
+            <th>件号</th>
+            <th>版本</th>
+            <th>品名</th>
+            <th>类别</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : items)
+        <tr>
+            <td>#(x.seqNum)</td>
+            <td align="right">
+                <div style="background-color: gray; width: #(x.levelRate)%;height: 3px;">
+                    #(x.level)
+                </div>
+            </td>
+            <td>#(x.partNum)</td>
+            <td>#(x.partVersion)</td>
+            <td>#(x.partName) #(x.partNameZh)</td>
+            <td>#(x.partFamily)</td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+</div>
+#end
